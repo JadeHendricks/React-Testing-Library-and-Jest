@@ -1,0 +1,13 @@
+- Libraries and their purpose
+-- @testing-library/react
+   - uses ReactDOM to render a component for testing
+-- @testing-library/user-event
+   - Helps simulate user input like typing and clicking
+-- @testing-library/ReactDOM
+   - Helps find elements that are rendered by our components
+-- Jest
+   - Runs our tests, reports results.
+   - It's responsible for collection all of our test files and executing them.
+   - Jest finds all files in the src folder that ends with .spec.js, .test.js or files placed in a __test__ folder.
+-- jsdom
+   - Simulates a browser when running in a Node environment.
