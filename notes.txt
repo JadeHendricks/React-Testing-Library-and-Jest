@@ -31,6 +31,20 @@ Elements and their ARIA ROLES
 - "button" - button
 - "link" - a
 - "textbox" input
+- if you are not able to find te correct amount/elements using role, you can use these 2 escape hatch methods
+  - data-testid
+  - container.querySelector
+
+data-testid
+- HTML = <div data-testid="users"></div>
+- within(screen.getTestId("users")).getAllByRole("row"); // get the element and inside of that get me all the elements with a role of row
+- requires use to modify the html/template/component
+
+container.querySelector
+- You won't need to modify the html/template/component
+- You'll need to get access to the container - const {container} = render(<UserList users={users} />);
+- The container is added to the template when you run a test. As a wrapper div
+- We can then us this container to query the DOM - const rows = container.querySelectorAll("tbody tr");
 
 Different types of Matches
 - Jest example matches - normally for general purpose things, can be really used on any JS code
@@ -38,7 +52,7 @@ Different types of Matches
   - expect(5).toEqual(5) - Makes sure the value equals another value.
   - expect(["a", "b", "x"]).toContain("b") - Makes sure an array contains a value, or make sure a string contains another string.
   - expect(fn).toThrow(2) - Makes sure functions throws an error when called.
-  - expect(mock).toHaveBeenCalled() - Makes sure a mock fucntion has been called.
+  - expect(mock).toHaveBeenCalled() - Makes sure a mock function has been called.
 - React Testing library
   - expect(element).toBeInDocument() - Makes sure an element is present on the page.
   - expect(element).toBeEnabled() - Makes sure an element (like an input) is not disabled.
@@ -50,3 +64,13 @@ Mock functions
 - mocks as in not a real function.
 - it records whenever it gets called, and the arguments it was called with. (like internal storage)
 - used very often when we need to make sure a component calls a callback
+
+Using screen.logTestingPlaygroundURL()
+- To get help with finding a particular element, use this helper function.
+- Takes the HTML currently rendered by your component and created a link to view that html in the "testing playground" tool.
+- Testing playground helps us write queries (function to find elements.)
+
+BeforeEach 
+- This is a global method inside of JEST.
+- When using a before each in your test file, it will first run the before each method before running any of your tests.
+- Youcan also just create your own function and call it in your tests. (on top)
