@@ -1,5 +1,3 @@
-import React from 'react';
-
 const UserList = ({ users }) => {
     const renderedUsers = users.map((user, index) => {
         return (
@@ -8,7 +6,6 @@ const UserList = ({ users }) => {
                 <td>{user.email}</td>
             </tr>
         )
-
     });
 
     return (

@@ -1,13 +1,52 @@
-- Libraries and their purpose
--- @testing-library/react
-   - uses ReactDOM to render a component for testing
--- @testing-library/user-event
-   - Helps simulate user input like typing and clicking
--- @testing-library/ReactDOM
-   - Helps find elements that are rendered by our components
--- Jest
-   - Runs our tests, reports results.
-   - It's responsible for collection all of our test files and executing them.
-   - Jest finds all files in the src folder that ends with .spec.js, .test.js or files placed in a __test__ folder.
--- jsdom
-   - Simulates a browser when running in a Node environment.
+Libraries and their purpose
+- @testing-library/react
+  - uses ReactDOM to render a component for testing
+- @testing-library/user-event
+  - Helps simulate user input like typing and clicking
+- @testing-library/ReactDOM
+  - Helps find elements that are rendered by our components
+- Jest
+  - Runs our tests, reports results.
+  - It's responsible for collection all of our test files and executing them.
+  - Jest finds all files in the src folder that ends with .spec.js, .test.js or files placed in a __test__ folder.
+- jsdom
+  - Simulates a browser when running in a Node environment.
+
+What happens when we run our tests?
+- whenever we run our tests, they are being executed in a nodejs environment.
+- whenever we render our component by using our render() a fake browser environment is created by a library called JSDOM.
+- our component is render, html is taken from it and used by the fake browser environment.
+- after we've used render we can access elements in this environmentusing the "screen object"
+
+What is the word "Role" in testing referring to. (ARIA ROLES)
+- it refers to a aria "Role" aka the purpose of an HTML elements.
+- traditionally used by screen readers - softwares to help people understand the content on the screen.
+- many HTML element have a "implicit" or automatically assigned role.
+- elements can be assigned manually a role. Even trained engineers do this incorrectly.
+
+Elements and their ARIA ROLES
+- Role selection is the primary way REACT testing library wants you use to find elements
+- "heading" - H1, H2, H3, H4, H5, H6
+- "list" - ul, li
+- "button" - button
+- "link" - a
+- "textbox" input
+
+Different types of Matches
+- Jest example matches - normally for general purpose things, can be really used on any JS code
+  - expect(["a", "b"]).toHaveLength(2) - Makes sure the value is an array with a particular length.
+  - expect(5).toEqual(5) - Makes sure the value equals another value.
+  - expect(["a", "b", "x"]).toContain("b") - Makes sure an array contains a value, or make sure a string contains another string.
+  - expect(fn).toThrow(2) - Makes sure functions throws an error when called.
+  - expect(mock).toHaveBeenCalled() - Makes sure a mock fucntion has been called.
+- React Testing library
+  - expect(element).toBeInDocument() - Makes sure an element is present on the page.
+  - expect(element).toBeEnabled() - Makes sure an element (like an input) is not disabled.
+  - expect(element).toHaveClass() - Makes sure an element has a class name.
+  - expect(element).toHaveTextContent() - Makes sure an element has some particular text.
+  - expect(element).toHaveValue() - Makes sure an input, select or textarea has a value.
+  
+Mock functions
+- mocks as in not a real function.
+- it records whenever it gets called, and the arguments it was called with. (like internal storage)
+- used very often when we need to make sure a component calls a callback
