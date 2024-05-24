@@ -7,6 +7,10 @@ const UserForm = ({ onUserAdd }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         onUserAdd({name, email});
+        
+        //reset inputs
+        setName("");
+        setEmail("");
     }
 
     return (
