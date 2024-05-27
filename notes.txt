@@ -74,3 +74,7 @@ BeforeEach
 - This is a global method inside of JEST.
 - When using a before each in your test file, it will first run the before each method before running any of your tests.
 - Youcan also just create your own function and call it in your tests. (on top)
+
+Using RTL-Book
+- Close with CTRL + C
+- Open with npx rtl-book serve roles-notes.js
