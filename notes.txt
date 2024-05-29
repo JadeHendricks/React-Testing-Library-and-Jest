@@ -78,3 +78,23 @@ BeforeEach
 Using RTL-Book
 - Close with CTRL + C
 - Open with npx rtl-book serve roles-notes.js
+
+Using ACT
+- The act function defines a window in time where state updates can (and should) occur.
+- React will process all state updates + useEffects before exiting ACT.
+- This gives us some time to get the data back before moving on and having async tests fail.
+- React Testing Library uses "act" behind the scenes for you.
+- To solve act warnings, you should use a "findBy". Usually you don't want to follow the advice of the warning.
+- These call "act" automatically for you. (This is the preffered way of using "act" when using RTL - React testing library)
+  - screen.findBy - findBy are async in nature, gives us 1 second to get data
+  - screen.findByAll - findBy are async in nature, gives us 1 second to get data
+  - waitFor
+  - user.keyboard - Synchronous
+  - user.click - Synchronous
+
+Options to solve act warnings (from best to worst)
+- Use a "findBy" || "findByAll" to detect when the component has finished its data fetching.
+- Use an "act" to control when the data-fetching request gets resolved.
+- Use a module mock to avoid rendering the troublesome component. (see test file for an example)
+  - we can use it to pretend to be content of some other file - aka "Don't ever import the file was added as a mock, if anyone tried to import that item, use our mock instead."
+- use an "act" with a pause. (please avoid this)
