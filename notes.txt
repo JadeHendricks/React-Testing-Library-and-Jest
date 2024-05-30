@@ -101,6 +101,8 @@ Options to solve act warnings (from best to worst)
 
 SWR
 - Behind the scenes SWR is still using the AXIOS behind the scenes to make a request.
+- you can think of it as a combination of useEfect and useState.
+- it's only going to attempt to fetch the data one single time and send the cache version next time. (it has it's own cache)
 
 Data fetching in tests
 - We don't want our components to make actual network requests
@@ -118,3 +120,12 @@ Before All, After Each, After All
 - afterEach() - will run after each individual test inside of the file has run. (can reset the server with this for an example)
 - afterAll() - will run after all tests in this file has executed. (we can stop our server here for an example)
 - see HomeRoute.test.js for an example.
+
+The DESCRIBE function
+- allows us to nest tests
+- allows us to mark a block of tests with a overall message of what they all do
+- it scopes the Before All, After Each, After All functions meaning they will only apply to the tests inside of the describe if it is used there.
+- if you want Before All, After Each, After All to apply to the entire document, you will need to add it outside of this describe block.
+- allows us to change the order of execution to what we want it to do and where we want it to happen.
+- it also formats the tests in the report inside of the terminal.
+- adding describe.only to describe allows us to only run tests in that block for limiting test execution.
