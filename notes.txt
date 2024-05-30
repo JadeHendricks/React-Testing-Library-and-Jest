@@ -98,3 +98,23 @@ Options to solve act warnings (from best to worst)
 - Use a module mock to avoid rendering the troublesome component. (see test file for an example)
   - we can use it to pretend to be content of some other file - aka "Don't ever import the file was added as a mock, if anyone tried to import that item, use our mock instead."
 - use an "act" with a pause. (please avoid this)
+
+SWR
+- Behind the scenes SWR is still using the AXIOS behind the scenes to make a request.
+
+Data fetching in tests
+- We don't want our components to make actual network requests
+- Slow data might change!
+- We fake (or mock) daa fetching in tests
+- Options for data fetching
+  - #1 - Mock the file that contains the data fetching code - (easiest but doesn't actually test the component)
+  - #2 - Use a library to "mock" axios/fetch - get axios to return fake data (we an use MSW Library - Mock service worker)
+    - MSW Library - when making a request the MSW Library is going to intercept that request and instead of allowing it to continue, it will immediately return some mock data back.
+  - #3 - Create a manual mock for axios
+
+Before All, After Each, After All
+- These are built into the jest test runner and run automatically.
+- beforeAll() - will be executed one time before all the tests inside of this file. (can start listening to server requests here for example)
+- afterEach() - will run after each individual test inside of the file has run. (can reset the server with this for an example)
+- afterAll() - will run after all tests in this file has executed. (we can stop our server here for an example)
+- see HomeRoute.test.js for an example.
