@@ -3,40 +3,24 @@ import { setupServer } from 'msw/node';
 import { rest } from 'msw';
 import { MemoryRouter } from 'react-router-dom';
 import HomeRoute from './HomeRoute';
+import { createServer } from '../test/server';
 
-const handlers = [
-    //this will watch for any requests to "/api/repositories" and mock it in our test
-    //request, response, context
-    rest.get('/api/repositories', (req, res, ctx) => {
-        const query = req.url.searchParams.get('q');
-        const language = req.url.searchParams.get('q').split('language:')[1];
-        
-        return res (
-            ctx.json({
-              items: [
-                { id: 1, full_name: `${language}_one` },
-                { id: 2, full_name: `${language}_two` }
-              ]  
-            })
-        );
-    })
-];
-
-// we need this to make sure the request above is actually running
-const server = setupServer(...handlers);
-
-//these are built into the jest test runner
-beforeAll(() => {
-    server.listen();
-});
-
-afterEach(() => {
-    server.resetHandlers();
-});
-
-afterAll(() => {
-    server.close();
-});
+createServer([
+    {
+        //this will watch for any requests to "/api/repositories" for example and mock it in our test
+        path: '/api/repositories',
+        //request, response, context
+        res: (req) => {
+            const language = req.url.searchParams.get('q').split('language:')[1];
+            return {
+                items: [
+                    { id: 1, full_name: `${language}_one` },
+                    { id: 2, full_name: `${language}_two` }
+                ]  
+            }
+        }
+    }
+]);
 
 test('renders two links for each language', async() => {
     render(
